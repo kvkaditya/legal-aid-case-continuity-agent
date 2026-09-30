@@ -1,9 +1,12 @@
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 from typing import Optional
 
 
 class Settings(BaseSettings):
     """Application settings"""
+
+    model_config = ConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     # API
     api_title: str = "Legal Aid Case Continuity Agent"
@@ -25,9 +28,6 @@ class Settings(BaseSettings):
     hindsight_api_key: Optional[str] = None
     hindsight_api_url: Optional[str] = None
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-
 
 settings = Settings()
+
